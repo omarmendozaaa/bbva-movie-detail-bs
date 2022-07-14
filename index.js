@@ -1,0 +1,1 @@
+export { BbvaMovieDetailBs } from './src/BbvaMovieDetailBs.js';
