@@ -43,7 +43,15 @@ export class BbvaMovieDetailBs extends LitElement {
       getComponentSharedStyles('bbva-movie-detail-bs-shared-styles'),
     ];
   }
-
+  _getCategoryIdEvent(item){
+    this.dispatchEvent(
+      new CustomEvent('get-id-category-event', {
+        bubbles: true,
+        composed: true,
+        detail: item
+      })
+    );
+  }
   // Define a template
   render() {
     const release_date = new Date(this.movie.release_date);
@@ -75,7 +83,7 @@ export class BbvaMovieDetailBs extends LitElement {
                     <p class="fst-italic fw-bold">Overview</p>
                     <p class="card-text">${this.movie.overview}</p>
                     <p class="fst-italic fw-bold">Categories</p>
-                    <bbva-list-category-card .categoryList=${this.movie.genres} .isdetail=${true}></bbva-list-category-card>
+                    <bbva-list-category-card .categoryList=${this.movie.genres} .isdetail=${true} @get-category-event=${(e) => this._getCategoryIdEvent(e.detail)}></bbva-list-category-card>
                     <br>
                     <p class="fst-italic fw-bold">Rate</p>
                     <div class="progress">
